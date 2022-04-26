@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: antiquewhite;
+      }
+    </style>
+  </head>
+  <body>
+    <input placeholder="请输入电话" />
+    <div class="box"></div>
+    <script>
+      // 防抖 => 固定时间内，将多次操作变成一次
+      let telInput = document.querySelector('input');
+      // 无防抖
+      // telInput.addEventListener('input', e => {
+      //   console.log('quest');
+      // });
+      // 防抖模式，防止数据抖动，wait时间后再触发事件
+      telInput.addEventListener('input', debounce(demo, 2000));
+      function debounce(fn, await) {
+        let timer = null;
+        return () => {
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(() => {
+            fn.apply(this, arguments);
+          });
+        };
+      }
+      function demo() {
+        console.log('发起请求');
+      }
+
+      // 节流 => 保证一定时间内多个操作变成一个
+      let box = document.querySelector('.box');
+      // 无节流
+      // box.addEventListener('mouseover', e => {
+      //   console.log('query2');
+      // });
+      // 节流
+      box.addEventListener('mouseover', throttle(event, 2000));
+      function throtte(func, time) {
+        let activeTime = 0;
+        return () => {
+          const current = Date.now();
+          if (current - activeTime > time) {
+            func.apply(this, arguments);
+            activeTime = Date.now();
+          }
+        };
+      }
+    </script>
+  </body>
+</html>

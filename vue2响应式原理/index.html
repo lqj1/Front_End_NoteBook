@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="“app">
+      订阅视图-1：
+      <span class="box-1"></span>
+      订阅视图-2：
+      <span class="box-2"></span>
+    </div>
+    <script src="index.js"></script>
+    <script>
+      // 1. 模板订阅
+      // 2. 数据发生变化，告诉模板同步变化
+      let obj = {};
+      // 订阅第一个视图
+      dataHi({
+        data: obj, // 需要劫持的对象
+        target: 'view-1', // 用到的模板
+        datakey: 'one',
+        selector: '.box-1',
+      });
+      // 订阅第二个视图
+      dataHi({
+        data: obj, // 需要劫持的对象
+        target: 'view-2', // 用到的模板
+        datakey: 'two',
+        selector: '.box-2',
+      });
+      // 1. 初始化赋值，只需1次
+      // 这种赋值不是通过操作dom，而是通过发布订阅整套的流程
+      obj.one = '这是视图1';
+      obj.two = '这是视图2';
+      // 2. 劫持数据，更新者负责重新渲染，可以n次
+      // 在控制台通过 obj.one / obj.two 获取值或者修改值，可以看到页面同步修改
+      // 响应式要点
+      // a. 数据联动/双向绑定
+      // b. 需要捕获到修改
+    </script>
+  </body>
+</html>
