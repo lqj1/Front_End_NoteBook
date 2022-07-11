@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <h1>{{ str }}</h1>
+  {{ str }}
+  <p>
+    {{ b }}
+  </p>
+  <!-- 事件一般是加在元素(nodeType===1)上面 -->
+  <button @click="btn">按钮</button>
+</div>
+<script type="text/javascript" src="./03-添加事件.js"></script>
+<script type="text/javascript">
+new Vue({
+  el: '#app',
+  data: {
+    str: 'hello world',
+    b: '这也是data数据'
+  },
+  beforeCreate() {
+  },
+  created() {
+  },
+  beforeMount() {
+  },
+  mounted() {
+  },
+  methods: {
+    btn(e) {
+      // e 为事件对象
+      console.log('e:',e);
+      // 源码中可以直接通过this.str获取this.$data.str，所以需要解决这个问题
+      // 做的事情就是将 data 中的值放到new Vue的对象中
+      console.log('str:',this.str);
+      console.log('data.str:',this.$data.str);
+    }
+  }
+})
+</script>
+</body>
+</html>

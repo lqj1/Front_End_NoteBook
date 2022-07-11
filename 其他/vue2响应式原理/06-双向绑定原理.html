@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <h1>{{ str }}</h1>
+  {{ str }}
+  <p>
+    {{ b }}
+  </p>
+  <button @click="btn">按钮</button>
+  <!-- 双向绑定 str -->
+  <input type="" name="" v-model="str">
+</div>
+<script type="text/javascript" src="./06-双向绑定原理.js"></script>
+<script type="text/javascript">
+new Vue({
+  el: '#app',
+  data: {
+    str: 'hello world',
+    b: '这也是data数据'
+  },
+  beforeCreate() {
+  },
+  created() {
+  },
+  beforeMount() {
+  },
+  mounted() {
+  },
+  methods: {
+    btn(e) {
+      this.str = '修改数据了'
+      // console.log('this change:', this); 
+    }
+  }
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <h1>{{ str }}</h1>
+  {{ str }}
+  <p>
+    {{ b }}
+  </p>
+  <button @click="btn">按钮</button>
+</div>
+<script type="text/javascript" src="./05-更新视图.js"></script>
+<script type="text/javascript">
+new Vue({
+  el: '#app',
+  data: {
+    str: 'hello world',
+    b: '这也是data数据'
+  },
+  beforeCreate() {
+  },
+  created() {
+  },
+  beforeMount() {
+  },
+  mounted() {
+  },
+  methods: {
+    btn(e) {
+      // console.log('this:', this);
+      // console.log('e:',e);
+      // console.log('str:',this.str);
+      // console.log('data.str:',this.$data.str);
+      // 新的问题
+      this.str = '修改数据了'
+      console.log('this change:', this);   // data中的str以及点击事件中的str都修改了，但是视图层没有修改
+      // 要修改视图层的元素，需要使用innerHTML,innerText,textContent等去修改dom
+    }
+  }
+})
+</script>
+</body>
+</html>
