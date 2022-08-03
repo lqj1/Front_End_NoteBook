@@ -1,5 +1,6 @@
 /**
  * find: 返回满足条件的第一个元素
+ * 如果没有符合条件的元素返回 undefined，也即是不返回东西
  */
 
 Array.prototype.myFind = function (fn) {
@@ -14,7 +15,6 @@ Array.prototype.myFind = function (fn) {
       return self[i]
     }
   }
-  return res
 }
 
 let arr = [6, 10, 11]
