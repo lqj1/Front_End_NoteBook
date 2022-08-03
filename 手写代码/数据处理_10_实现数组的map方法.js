@@ -7,9 +7,16 @@ Array.prototype.myMap = function (fn) {
   if (typeof fn!== 'function') {
     console.error('参数必须是一个函数');
   }
+  let self = this
   const res = []
-  for (let i = 0, len = this.length; i < len; i++) {
-    res.push(fn(this[i]))
+  for (let i = 0; i < self.length; i++) {
+    res.push(fn(self[i], i, self))
   }
   return res
 }
+
+var arr = [1,2,3]
+let newArray = arr.myMap((item, index, arr) => {
+	return item*2
+})
+console.log(newArray)

@@ -28,9 +28,11 @@ Array.prototype.myFilter = function (fn) {
   if (typeof fn !== 'function') {
     console.error('参数必须是一个函数')
   }
+  let self = this
   const res = []
-  for (let i = 0, len = this.length; i < len; i++) {
-    fn(this[i]) && res.push(this[i])
+  for (let i = 0; i < self.length; i++) {
+    // 先筛选，通过再存入结果
+    fn(self[i], i, self) && res.push(self[i])
   }
   return res
 }

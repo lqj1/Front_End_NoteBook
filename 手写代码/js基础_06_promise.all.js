@@ -10,19 +10,19 @@
 function promiseAll (promises) {
   return new Promise(function (resolve, reject) {
     if (!Array.isArray(promises)) {
-      throw new TypeError(`argument must be a array`)
+      throw new TypeError(`arguments must be a array`)
     }
-    var resolvedCounter = 0;
-    var promiseNum = promises.length;
-    var resolvedResult = [];
-    for (let i = 0; i < promiseNum; i++) {
+    var count = 0;
+    var result = [];
+    var promisesNum = promises.length;
+    for (let i = 0; i < promisesNum; i++) {
       Promise.resolve(promises[i]).then(value => {
-        resolvedCounter++;
+        count++;
         // 将值存入resolvedResult中
-        resolvedResult[i] = value;
-        if (resolvedCounter == promiseNum) {
-          // 全部通过就 resolve,这里有resolve才会输出 resolvedResult:[3,1,2]
-          return resolve(resolvedResult)
+        result[i] = value;
+        if (count == promisesNum) {
+          // 全部通过就 resolve,这里有resolve才会输出 result:[3,1,2]
+          return resolve(result)
         }
       },error => {
         // 有一个错就 reject
