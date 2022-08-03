@@ -59,3 +59,59 @@ function deepClone (object) {
   }
   return newObject
 }
+
+// 手写实现深拷贝2
+// 标准的深拷贝 => 引用数据类型(数组,对象)
+function deepClone(source) {
+  // 最后一层，对象进入为： {str: '111', age: 12}
+  // 数组进入为： [1, 2, 3, 4]
+  // constructor 构造对象
+  // [] => Array(基类)
+  // {} => Object
+  const targetObj = source.constructor === Array ? [] : {}; // 创建外层容器用于处理
+  // 对象就是键值，而数组通过 for in 就直接取了里面的下标，for of 不能遍历对象
+  for (let keys in source) {
+    // 数组判断hasOwnProperty中的keys是下标，而对象则是键值
+    if (source.hasOwnProperty(keys)) {
+      // keys 一共3种 =>  1. 基础数据类型 2.对象 3.数组
+      // console.log('source: ', source[keys]);  // 数组没有key，但属于object，所以会进入下面的判断
+      if (source[keys] && typeof source[keys] === 'object') {
+        // 引用数据类型 => 1.数组 2.对象
+        // 内层也可能是对象或数组，创建内层容器
+        console.log('source: ', source[keys]);
+        targetObj[keys] = source[keys].constructor === Array ? [] : {}; // 维护层代码，可以删除
+        targetObj[keys] = deepClone(source[keys]); // 递归
+      } else {
+        // 基本数据类型，以及一维数组和一层的对象就进入这里的判断
+        targetObj[keys] = source[keys];
+      }
+    }
+  }
+  return targetObj;
+}
+let objA = {
+  ff: 'name',
+  gg: 1,
+  obj: { str: '111', age: 12 },
+  arr: [1, 2, 3, 4],
+};
+let newObj = deepClone(objA);
+newObj.ff = 'test';
+newObj.arr.push('1');
+console.log(objA, newObj);
+
+// 简写
+function deepClone (source) {
+  const targetObj = source.constructor === Array ? [] : {}
+  for (let keys in source) {
+    if (source.hasOwnProperty) {
+      if (source[keys] && typeof source[keys] === 'object') {
+        targetObj[keys] = source[keys].constructor === Array ? [] : {}
+        targetObj[keys] = deepClone(source[keys])
+      } else {
+        targetObj[keys] = source[keys]
+      }
+    }
+  }
+  return targetObj
+}

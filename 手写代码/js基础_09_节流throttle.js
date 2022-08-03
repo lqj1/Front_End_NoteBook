@@ -30,8 +30,21 @@ function throttle (func, delay) {
   }
 }
 
-// 方法2：根据时间间隔发，记录上一次执行的时间
+// 方法2(推荐)：根据时间间隔发，记录上一次执行的时间
 // 用当前时间减去上一次的时间，如果大于设置的delay，那么执行 func，并且刷新上一次的时间为now
+function throttle (func, delay) {
+  let pre = 0
+  return function () {
+    let now = new Date()
+    let context = this
+    let args = arguments
+    if (now - pre > delay) {
+      func.apply(context, arguments)
+      pre = now
+    }
+  }
+}
+
 function throttle (func, delay) {
   let pre = 0
   return function () {

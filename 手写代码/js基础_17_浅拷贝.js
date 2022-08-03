@@ -11,9 +11,10 @@
  */
 /**
  * 注意
- * 1. 如果目标对象和源对象有同名属性，或者多个源对象有同名属性，则后面的属性会覆盖前面的属性
- * 2. 如果该函数只有一个参数，当参数为对象时，直接返回对象；当参数不是对象时，会先将参数转为对象然后返回
- * 3. 因为 null 和 undefined 不能转化为对象，所以第一个参数不能为 null 或 undefined，会报错
+ * 1. Object.assign() 只有第一层是深拷贝，后面层都是浅拷贝
+ * 2. 如果目标对象和源对象有同名属性，或者多个源对象有同名属性，则后面的属性会覆盖前面的属性
+ * 3. 如果该函数只有一个参数，当参数为对象时，直接返回对象；当参数不是对象时，会先将参数转为对象然后返回
+ * 4. 因为 null 和 undefined 不能转化为对象，所以第一个参数不能为 null 或 undefined，会报错
  */
 let target = { a: 1 }
 let object1 = { b: 2 }
@@ -54,7 +55,7 @@ console.log(arr.slice() === arr);  // false
  */
 let arr2 = [1,2,3,4]
 console.log(arr2.concat());  // [1,2,3,4]
-console.log(arr2.concat() === arr);  // false
+console.log(arr2.concat() === arr2);  // false
 
 // 手写实现浅拷贝
 function shallowCopy (object) {
@@ -77,4 +78,18 @@ function shallowCopy (object) {
 let arr3 = {a:1,b:{c:2}}
 console.log(shallowCopy(arr3))
 
+
+// 简写
+function shallowCopy (object) {
+  if (!object || typeof object !== 'object') {
+    return 
+  }
+  let newObject = Array.isArray(object) ? [] : {}
+  for (let key in object) {
+    if (object.hasOwnProperty(key)) {
+      newObject[key] = object[key]
+    }
+  }
+  return newObject
+}
 

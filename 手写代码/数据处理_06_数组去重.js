@@ -7,6 +7,9 @@
  */
 const array = [1, 2, 3, 5, 1, 5, 9, 1, 2, 8]
 Array.from(new Set(array))  // [1, 2, 3, 5, 9, 8]
+// 简写
+res = [...new Set([1,2,3,3,5])]
+
 
 /**
  * 方法2：ES5方法，map 去重
@@ -24,3 +27,18 @@ function uniqueArray (array) {
   return res
 }
 uniqueArray(array2)
+
+
+// 简写
+const array3 = [1,2,3,4,3,2,7]
+function uniqueArray (array) {
+  let map = {}
+  let res = []
+  for (let i = 0; i < array.length; i++) {
+    if (!map.hasOwnProperty(array[i])) {
+      map[array[i]] = 1
+      res.push(array[i])
+    }
+  }
+  return res
+}
