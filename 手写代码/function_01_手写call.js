@@ -9,23 +9,18 @@
  * 7，返回结果
  */
 
-Function.prototype.myCall = function (context) {
-  // 判断调用对象是否为函数
-  if (typeof this!== "function") {
-    console.error('type error');
-  }
-  // 获取除了第一项的参数
-  let args = [...arguments].slice(1)
-  let result = null
-  // 判断 context 是否传入，如果未传入则设置为 window
-  // 这里的 context 为第一个参数db，而后面的参数需要通过 arguments 获取
-  context = context || window
-  // 将调用对象设为对象的方法 
-  context.fn = this
-  // 调用函数
-  result = context.fn(...args)
+Function.prototype.myCall = function (thisArg, ...args) {
+  // this表示调用call的对象，一般为函数
+  let fn = this  // this指的是当前函数
+  // thisArg是第一个参数，也就是要绑定this到的对象
+  // 如果要是obj为undefined或者null时，设置其为window,
+  // 如果是基本数据类型，则将其设置为对象类型
+  thisArg = (thisArg === undefined || thisArg === null) ? window : Object(thisArg)  
+  thisArg.fn = fn 
+  args = args || []  // 如果arg不存在，将其设置为[]，方便解构
+  let result = thisArg.fn(...args)
   // 将属性删除
-  delete context.fn
+  delete thisArg.fn
   return result
 }
 
@@ -50,9 +45,9 @@ Function.prototype.myCall = function (context) {
  }
  // 实例2
 obj.myFun.myCall(db, '艾欧尼亚', '祖安');        // 德玛西亚 年龄 18  来自 艾欧尼亚去往祖安
-// 23行中的 this 为 整个myFun函数
+// this 为 整个myFun函数
 obj.myFun.myCall()                            // 小王 年龄 17  来自undefined 去往undefined
-// 21行中，没有参数传入，this指向 window
+// 没有参数传入，this指向 window
 
 
  obj.myFun.call(db, '艾欧尼亚', '祖安');        // 德玛西亚 年龄 18  来自 艾欧尼亚去往祖安

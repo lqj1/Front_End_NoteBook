@@ -8,25 +8,13 @@
  * 6. 删除刚才新增的属性
  * 7. 返回结果
  */
-Function.prototype.myApply = function (context) {
-  // 判断调用对象是否为函数
-  if (typeof this !== 'function') {
-    throw new TypeError('error')
-  }
-  let result = null
-  // 判断 context 是否存在，如果未 传入则为 window
-  // 这里的 context 为第一个参数db，而后面的参数需要通过 arguments 获取
-  context = context || window
-  // 将函数设为对象的方法
-  context.fn = this
-  // 调用方法，因为传入数组，所以只需要获取第二个参数即可
-  if (arguments[1]) {
-    result = context.fn(...arguments[1])
-  } else {
-    result = context.fn()
-  }
-  // 将属性删除
-  delete context.fn
+Function.prototype.myApply = function (thisArg, ...args) {
+  let fn = this
+  thisArg = (thisArg === undefined || thisArg === null) ? window : Object(thisArg)
+  thisArg.fn = fn
+  args = args || []
+  let result = thisArg.fn(...args)
+  delete thisArg.fn  // //执行完之后就删除该对象上的属性
   return result
 }
 

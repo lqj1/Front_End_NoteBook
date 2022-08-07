@@ -3,6 +3,7 @@
  * 2. 节流可以使用在 scroll 函数的事件监听上，通过事件节流来[降低事件调用的频率]。
  * 3. 在连续执行时间时，使事件在相同时间间隔内执行
  * 4. 场景：
+ *    xu浏览器窗口大小resize避免次数过于频繁
  *    scroll滚动事件，每隔特定描述执行回调函数
  *    input输入框，每个特定时间发送请求或是展开下拉列表，（防抖也可以）
  */
@@ -53,6 +54,19 @@ function throttle (func, delay) {
     let args = arguments
     if (now - pre > delay) {
       func.apply(context, arguments)
+      pre = now
+    }
+  }
+}
+
+function throttle (func, delay) {
+  let pre = 0
+  return function () {
+    let now = new Date()
+    let context = this
+    let args = arguments
+    if (now - pre > delay) {
+      fn.apply(context, arguments)
       pre = now
     }
   }
