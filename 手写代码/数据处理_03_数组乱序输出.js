@@ -6,10 +6,9 @@
  * 3. 按照上面的规律执行，直到遍历完成
  */
 var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-Math.random()*(arr.length-1-i)
 for (let i = 0; i < arr.length; i++) {
   // 保证这个顺序是随机的额，且1-9之间各出现一次
-  const randomIndex = Math.round(Math.random()*(arr.length-1-i)) + 1
+  const randomIndex = Math.round(Math.random()*(arr.length-1-i)) + 1   // 核心，保证在长度中随机选一个数
   console.log(randomIndex);
   [arr[i], arr[randomIndex]] = [arr[randomIndex], arr[i]] 
 }
@@ -19,7 +18,7 @@ console.log(arr)
  * 方法2：
  * 倒序遍历
  */
-var arr2 = [1,2,3,4,5,6,7,8,9,10]
+var arr2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 let length2 = arr.length,  //10
   randomIndex2, temp2
 while (length) {

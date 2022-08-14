@@ -12,7 +12,7 @@ res = [...new Set([1,2,3,3,5])]
 
 
 /**
- * 方法2：ES5方法，map 去重
+ * 方法2：ES5方法，map 去重，hasOwnProperty
  */
 const array2 = [1, 2, 3, 5, 1, 5, 9, 1, 2, 8]
 function uniqueArray (array) {

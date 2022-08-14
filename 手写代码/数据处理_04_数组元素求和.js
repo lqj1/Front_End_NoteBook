@@ -1,6 +1,6 @@
 // arr=[1,2,3,4,5,6,7,8,9,10]，求和
 let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-let sum = arr.reduce((total,arrI)=>total+=arrI,0)
+let sum = arr.reduce((total,arrI)=>total+=arrI,0)    // 去掉大括号之后，可以不用写 return
 console.log(sum);
 
 // arr=[1,2,3,[[4,5],6],7,8,9]，求和
@@ -16,3 +16,4 @@ function add (arr4) {
   return arr4[0] + add(arr4.slice(1))
 }
 console.log(add(arr4));  // 21
+

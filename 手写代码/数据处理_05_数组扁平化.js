@@ -24,9 +24,9 @@ console.log(flatten(arr))
  */
 let arr2 = [1, [2, [3, 4, 5]]]
 function flatten2 (arr) {
-  return arr.reduce(function (prev, next) {
+  return arr.reduce(function (acc, cur) {
     // 初始为空数组，将递归的函数作为 reduce 的第一个参数
-    return prev.concat(Array.isArray(next) ? flatten(next) : next)
+    return acc.concat(Array.isArray(cur) ? flatten(cur) : cur)
   }, [])
 }
 console.log(flatten2(arr));

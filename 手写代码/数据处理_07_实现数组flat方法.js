@@ -20,11 +20,13 @@ function _flat (arr, depth) {
   if (!Array.isArray(arr) || depth <=0) {
     return arr
   } 
-  return arr.reduce((prev, cur) => {
+  return arr.reduce((acc, cur) => {
     if (Array.isArray(cur)) {
-      return prev.concat(_flat(cur,depth-1))
+      return acc.concat(_flat(cur,depth-1))
     } else {
-      return prev.concat(cur)
+      return acc.concat(cur)
     }
   },[])
 }
+let arr = [1, [2, [3, [4, 5]]], 6]
+_flat(arr)
