@@ -9,13 +9,15 @@ Array.prototype.myforEach = function (callbackFn) {
     throw new TypeError(`${callbackFn} is not a function`)
   }
   // 取到执行方法的数组对象和传入的this对象
-  var self = this
+  let self = this
   // console.log('self: ', self);  // self:  ['1', '2', '3']
-  for (var i = 0; i < self.length; i++) {
-    // 执行回调函数
+  for (let i = 0; i < self.length; i++) {
+    // 执行回调函数，核心代码
     callbackFn(self[i], i, self)
   }
 }
+  
+  
 ['1', '2', '3'].myforEach((item => {
   console.log(item);
 }))

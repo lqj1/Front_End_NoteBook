@@ -13,39 +13,6 @@ function payMoney(a) {
   console.log(a)
 }
 
- 
-function debounce (fn, wait) {
-  let timer = null
-  return function () {
-    let context = this
-    let args = arguments
-    // 触发事件前，如果存在定时器，先清除
-    if (timer) {
-      clearTimeout(timer)
-      timer = null
-    }
-    // 设置定时器
-    timer = setTimeout(() => {
-      fn.apply(context, args)
-    }, wait);
-  }
-}
-
-
-function debounce (fn, wait) {
-  let timer = null
-  return function () {
-    let context = this
-    let args = arguments
-    if (timer) {
-      clearTimeout(timer)
-      timer = null
-    }
-    timer = setTimeout(() => {
-      fn.apply(context, args)
-    }, wait);
-  }
-}
 
 function debounce (fn, wait) {
   let timer = null
