@@ -89,19 +89,49 @@ function deepClone(source) {
   }
   return targetObj;
 }
+
+
+
 let objA = {
   ff: 'name',
   gg: 1,
   obj: { str: '111', age: 12 },
   arr: [1, 2, 3, 4],
+  regexp: /^\d+$/,
+  time: new Date(),
+  fun: function () { }
 };
 let newObj = deepClone(objA);
 newObj.ff = 'test';
 newObj.arr.push('1');
 console.log(objA, newObj);
 
-// 简写
+/**
+ * 注意：
+  除了正则，函数和日期的转换也会有问题，如下：
+  正则变成空
+  函数变成空
+  日期变成字符串而不是标准格式
+ */
+
+// 最终简化版
 function deepClone (source) {
+  // 过滤特殊情况，跳出递归
+  if(typeof source !== 'object') return source;  // 不是对象，就返回obj
+  // 能往下走就是对象
+  if(source === null) return null;  // source 也是对象，需要排除
+  // 正则处理
+  if(source instanceof RegExp) {
+      return new RegExp(source)    
+  }
+  // 时间处理
+  if(source instanceof Date) {
+      return new Date(source)    
+  }
+  // 函数处理
+  if(source instanceof Function) {
+      return new Function(source)    
+  }
   const targetObj = source.constructor === Array ? [] : {}
   for (let keys in source) {
     if (source.hasOwnProperty) {
