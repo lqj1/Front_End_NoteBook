@@ -53,21 +53,9 @@ function throttle (func, delay) {
     let context = this
     let args = arguments
     if (now - pre > delay) {
-      func.apply(context, arguments)
+      func.apply(context, args)
       pre = now
     }
   }
 }
 
-function throttle (func, delay) {
-  let pre = 0
-  return function () {
-    let now = new Date()
-    let context = this
-    let args = arguments
-    if (now - pre > delay) {
-      fn.apply(context, arguments)
-      pre = now
-    }
-  }
-}
