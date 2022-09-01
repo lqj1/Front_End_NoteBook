@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  // DOM元素操作法
+    let body = document.querySelector('body')
+    body.innerHTML = '<p>牛客网是一个专注于程序员的学习和成长的专业平台。</p>'
+  // DOM节点操作法
+    let p = document.createElement('p')
+    let text = document.createTextNode('牛客网是一个专注于程序员的学习和成长的专业平台。')
+    p.appendChild(text)
+    document.body.appendChild(p)
+</script>
+</body>
+</html>
+<!-- 
+  请将下面这句话以段落的形式展示在浏览器中——“牛客网是一个专注于程序员的学习和成长的专业平台。”
+ -->
