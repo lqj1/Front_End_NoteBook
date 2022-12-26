@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <script type="text/javascript">
+      const _shouldUpdate = (oldVersion, newVersion) => {
+        // 补全代码
+        oldV = oldVersion.split('.').join('')
+        newV = newVersion.split('.').join('')
+        return newV > oldV
+      }
+    </script>
+  </body>
+</html>
+
+<!-- 
+  请补全JavaScript代码，该函数接收两个参数分别为旧版本、新版本，当新版本高于旧版本时表明需要更新，返回true，否则返回false。
+    注意：
+    1. 版本号格式均为"X.X.X"
+    2. X∈[0,9]
+    3. 当两个版本号相同时，不需要更新
+
+本题考点：split、join
+根据题目要求，根据新旧版本号是否需要更新返回true或false，核心步骤有：
+去除新旧版本号中的”.“
+将新旧版本号转换为数字
+判断数字大小
+ -->

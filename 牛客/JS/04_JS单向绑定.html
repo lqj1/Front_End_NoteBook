@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+    	<input id="input" type="text" />
+      <span id="span">111</span>
+
+        <script type="text/javascript">
+            // 补全代码
+            let input = document.getElementById('input')
+            let span = document.getElementById('span')
+            input.onchange = function() {
+              span.innerText = this.value
+            }
+        </script>
+    </body>
+</html>
+
+<!-- 
+  描述
+    请补全JavaScript代码，要求每当id为"input"的输入框值发生改变时触发id为"span"的标签内容同步改变。
+    注意：
+    1. 必须使用DOM0级标准事件（onchange）
+ -->

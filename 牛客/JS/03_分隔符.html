@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+        <script type="text/javascript">
+            function _comma(number) {
+                // 补全代码
+                let isNegative = ''
+                if (number < 0) {
+                  isNegative = '-'
+                  number = Math.abs(number)
+                }
+                let r_number = parseInt(number).toString().split('').reverse()
+                let idx = 0
+                let res = []
+                for (let i = 0; i < r_number.length; i++) {
+                  if (idx == 3) {
+                    res.push(',')
+                    idx = 0
+                    i -= 1
+                  } else {
+                    res.push(r_number[i])
+                    idx += 1
+                  }
+                }
+                res = res.reverse().join('')
+                return isNegative + res
+            }
+            console.log(_comma(123002000))
+        </script>
+    </body>
+</html>
+
+<!-- 
+  请补全JavaScript代码，要求返回参数数字的千分位分隔符字符串。
+  示例1
+    输入：
+    _comma(12300)
+    输出：
+    '12,300' 
+
+  本题考点：Math.abs、parseInt、split、reverse、join
+ -->

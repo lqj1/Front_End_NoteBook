@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <script type="text/javascript">
+      const _createArray = number => {
+        // 补全代码
+        // 方法1
+        // return new Array(number).fill(number)
+        // 方法2
+        return Array.from({length: number}, () => number)
+      }
+      console.log(_createArray(5));
+    </script>
+  </body>
+</html>
+
+<!-- 
+  请补全JavaScript代码，要求返回一个长度为参数值并且每一项值都为参数值的数组。
+    注意：
+    1. 请勿直接使用for/while
+
+创建数组，本题考点：new Array、Array.fill、Array.from
+根据题目要求创建数组，且数组项值都为参数值，核心步骤有：
+  1. 通过new Array函数构造实例的时候带入参数，可以生成该参数长度的空数组
+  2. 通过Array.fill函数可以将数组的每一项都改编为参数值
+  3. 或Array.from函数接收两个参数即可，第一个参数为数组或对象，都表示返回数组的长度。当参数为数组时它确定了返回的新数组长度，当参数为对象时，需要添加“length”属性表明数组长度
+  5. 第二个参数为一个函数，即第一个数组参数中的每一项都调用该函数
+ -->
