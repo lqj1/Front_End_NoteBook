@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片加载优化</title>
+</head>
+
+<body>
+    <div style="background-color: green;width:100vw;height:4000px"></div>
+    <div id="yellow" style="background-color: yellow;width:100vw;height:800px"></div>
+
+    <script>
+      // // 方案1
+      //   document.addEventListener('scroll', () => {
+      //       const clientH = document.documentElement.clientHeight//获取屏幕可视区域的高度，可以通过调出控制台来调节
+      //       console.log('clientH: ', clientH)
+      //       const scrollT = document.documentElement.scrollTop//获取浏览器窗口顶部与文档顶部之间的距离，也就是滚动条滚动的距离
+      //       console.log('scrollT: ', scrollT)
+      //       const offsetTop = document.getElementById('yellow').offsetTop//获取元素相对于文档顶部的高度
+      //       console.log('offsetTop: ', offsetTop)
+      //       if (clientH + scrollT > offsetTop) {
+      //           console.log('进入可视区域啦！！')
+      //       }
+      //   })
+      // 方案2
+        document.addEventListener('scroll', () => {
+          var bound = document.getElementById('yellow').getBoundingClientRect()
+          console.log('bound: ', bound)
+          var clientHeight = window.innerHeight // 这里和上面的 clientH 是相同的
+          console.log('clientHeight: ', clientHeight)
+          if (bound.top <= clientHeight) {
+            console.log('进入可视区域啦！！')
+          }
+        })
+    </script>
+</body>
+
+</html>
