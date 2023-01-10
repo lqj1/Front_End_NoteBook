@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!-- 步骤1：引入echarts.js文件 -->
+  <script src="lib/echarts.min.js"></script>
+</head>
+
+<body>
+  <!-- 步骤2：准备一个呈现图表的盒子 -->
+  <div style="width: 600px;height: 400px"></div>
+  <script>
+    // 步骤3：初始化echarts实例对象
+    // 参数, dom,决定图表最终呈现的位置
+    var mCharts = echarts.init(document.querySelector('div'))
+    // 步骤4：准备配置项
+    var option = {
+      title: {
+        text: '成绩', // 标题文字
+        link: 'http://www.itcast.cn', // 标题超链接
+        textStyle: { // 标题样式设置
+          color: 'red' // 标题文字
+        }
+      },
+      xAxis: {
+        type: 'category',  // 指明x轴为 类目轴
+        data: ['小明', '小红', '小王'] // 为类目轴提供数据, 该数据是一个数组, 数组中的每个元素会呈现在x轴上
+      },
+      yAxis: {
+        type: 'value'  // 指明x轴为 数值轴, 指明数值轴之后, 无需指定data
+      },
+      series: [
+        {
+          name: '语文', // 为图标起一个名称
+          type: 'bar', // 指明该图标类型为 柱状图
+          data: [70, 92, 87] // 为x轴的每一个元素, 指明呈现在y轴的数值
+        }
+      ]
+    }
+    // 步骤5：将配置项设置给echarts实例对象
+    mCharts.setOption(option)
+  </script>
+</body>
+
+</html>

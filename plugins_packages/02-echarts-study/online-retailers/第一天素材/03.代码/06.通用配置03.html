@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="lib/echarts.min.js"></script>
+</head>
+
+<body>
+  <div style="width: 600px;height:400px"></div>
+  <script>
+    var mCharts = echarts.init(document.querySelector("div"))
+    var xDataArr = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+    var yDataArr1 = [88, 92, 63, 77, 94, 80, 72, 86]
+    var yDataArr2 = [93, 60, 61, 62, 85, 79, 92, 30]
+    var option = {
+      title: {
+        text: '成绩展示',
+        textStyle: {
+          color: 'red'
+        },
+        borderWidth: 5,
+        borderColor: 'blue',
+        borderRadius: 5,
+        left: 50,
+        top: 10
+      },
+      tooltip: {
+        // trigger: 'item'
+        trigger: 'axis',
+        triggerOn: 'click',
+        // formatter: '{b} 的成绩是 {c}'
+        formatter: function(arg){
+          return arg[0].name + '的分数是:' + arg[0].data
+        }
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {}, // 导出图片
+          dataView: {}, // 数据视图
+          restore: {}, // 重置
+          dataZoom: {}, // 区域缩放
+          magicType: {
+            type: ['bar', 'line']
+          } // 动态图表类型的切换
+        }
+      },
+      legend: { // 图例, 图例中的data数据来源于series中每个对象的name, 图例可以帮助我们对图表进行筛选
+        data: ['语文', '数学']
+      },
+      xAxis: {
+        type: 'category',
+        data: xDataArr
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          name: '语文',
+          type: 'bar',
+          data: yDataArr1
+        },
+        {
+          name: '数学',
+          type: 'bar',
+          data: yDataArr2
+        }
+      ]
+    }
+    mCharts.setOption(option)
+  </script>
+</body>
+
+</html>

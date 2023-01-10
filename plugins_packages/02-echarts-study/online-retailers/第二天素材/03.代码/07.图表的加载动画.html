@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="lib/echarts.min.js"></script>
+  <script src="lib/jquery.min.js"></script>
+</head>
+
+<body>
+  <div style="width: 600px;height:400px"></div>
+  <script>
+    // var data = 
+    var mCharts = echarts.init(document.querySelector("div"))
+    mCharts.showLoading() // 在获取数据之前, 显示加载动画
+    $.get('data/test_data.json', function (ret) {
+      mCharts.hideLoading() // 当服务器数据获取成功之后, 隐藏加载动画
+      var axisData = []
+      for (var i = 0; i < ret.length; i++) {
+        var height = ret[i].height
+        var weight = ret[i].weight
+        var itemArr = [height, weight]
+        axisData.push(itemArr)
+      }
+      console.log(axisData)
+      var option = {
+        xAxis: {
+          type: 'value',
+          scale: true
+        },
+        yAxis: {
+          type: 'value',
+          scale: true
+        },
+        series: [
+          {
+            type: 'effectScatter',
+            data: axisData,
+            symbolSize: function (arg) {
+              // console.log(arg)
+              var weight = arg[1]
+              var height = arg[0] / 100
+              // BMI > 28 肥胖
+              // BMI: 体重/ 身高*身高     kg  m
+              var bmi = weight / (height * height)
+              if (bmi > 28) {
+                return 20
+              }
+              return 5
+            },
+            itemStyle: {
+              color: function (arg) {
+                console.log(arg)
+                var weight = arg.data[1]
+                var height = arg.data[0] / 100
+                var bmi = weight / (height * height)
+                if (bmi > 28) {
+                  return 'red'
+                }
+                return 'green'
+              }
+            },
+            showEffectOn: 'emphasis',
+            rippleEffect: {
+              scale: 10
+            }
+          }
+        ]
+      };
+      mCharts.setOption(option)
+    })
+
+    
+
+  </script>
+</body>
+
+</html>

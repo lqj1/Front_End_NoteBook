@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="lib/echarts.min.js"></script>
+  <script src="theme/itcast.js"></script>
+  <script src="lib/jquery.min.js"></script>
+</head>
+
+<body>
+  <div style="width: 600px;height:400px;border: 1px solid red"></div>
+  <div style="width: 600px;height:400px;border: 1px solid green" id="div1"></div>
+  <script>
+    var mCharts = echarts.init(document.querySelector("div"), 'itcast')
+    var xDataArr = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+    var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86]
+    var option = {
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
+      xAxis: {
+        type: 'category',
+        data: xDataArr
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          type: 'bar',
+          data: yDataArr,
+          markPoint: {
+            data: [
+              {
+                type: 'max', name: '最大值'
+              },
+              {
+                type: 'min', name: '最小值'
+              }
+            ]
+          },
+          markLine: {
+            data: [
+              {
+                type: 'average', name: '平均值'
+              }
+            ]
+          },
+          label: {
+            show: true,
+            rotate: 60
+          },
+          barWidth: '30%'
+        }
+      ]
+    }
+    mCharts.setOption(option)
+
+    var mCharts2 = echarts.init(document.querySelector('#div1'))
+    $.get('json/map/china.json', function(ret){
+      echarts.registerMap('aa', ret)
+      var option2 = {
+        geo: {
+          type: 'map',
+          map: 'aa'
+        }
+      }
+      mCharts2.setOption(option2)
+      // echarts.connect([mCharts, mCharts2]) // 将柱状图和地图关联起来
+    })
+    
+
+  </script>
+</body>
+
+</html>

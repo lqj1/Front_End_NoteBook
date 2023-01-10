@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="lib/echarts.min.js"></script>
+</head>
+
+<body>
+  <div style="width: 600px;height:400px"></div>
+  <script>
+    var mCharts = echarts.init(document.querySelector("div"))
+    var xDataArr = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+    var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86]
+    var option = {
+      dataZoom: [ // 控制区域缩放效果的实现
+        {
+          type: 'slider', // 缩放的类型  slide代表滑块  inside代表依靠鼠标滚轮
+          // type: 'inside'
+          xAxisIndex: 0
+        },
+        {
+          type: 'slider',
+          yAxisIndex: 0,
+          start: 0, // 渲染完成后, 数据筛选的初始值, 百分比
+          end: 80 // 渲染完成后, 数据筛选的结束值, 百分比
+        }
+      ],
+      toolbox: {
+        feature: {
+          dataZoom: {}
+        }
+      },
+      grid: {
+        show: true,
+        borderColor: 'red',
+      },
+      xAxis: {
+        type: 'category',
+        data: xDataArr
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          name: '语文',
+          type: 'bar',
+          markPoint: {
+            data: [
+              {
+                type: 'max', name: '最大值'
+              },{
+                type: 'min', name: '最小值'
+              }
+            ]
+          },
+          markLine: {
+            data: [
+              {
+                type: 'average', name: '平均值'
+              }
+            ]
+          },
+          label: {
+            show: true,
+            rotate: 60,
+            position: 'top'
+          },
+          barWidth: '30%',
+          data: yDataArr
+        }
+      ]
+    }
+    mCharts.setOption(option)
+  </script>
+</body>
+
+</html>

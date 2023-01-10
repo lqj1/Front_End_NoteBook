@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../lib/echarts.min.js"></script>
+    <!-- 
+      1. 引入 echarts.js 文件
+      2. 准备一个呈现图标的盒子
+      3. 初始化echarts实例对象
+      4. 准备配置项
+      5. 将配置项设置给echarts实例对象
+     -->
+  </head>
+  <body>
+    <div style="width: 600px; height: 400px"></div>
+    <script>
+      var myCharts = echarts.init(document.querySelector('div')); // 参数：dom
+    </script>
+  </body>
+</html>

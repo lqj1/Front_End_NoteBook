@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="lib/echarts.min.js"></script>
+</head>
+
+<body>
+  <div style="width: 600px;height:400px"></div>
+  <script>
+    var mCharts = echarts.init(document.querySelector("div"))
+    var xDataArr = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+    var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86]
+    var option = {
+      title: { // 标题设置
+        text: '成绩展示', // 标题文字
+        textStyle: { // 标题文字样式设置
+          color: 'red'
+        },
+        borderWidth: 5, // 标题边框宽度
+        borderColor: 'blue', // 标题边框颜色
+        borderRadius: 5, // 标题边框圆角
+        left: 50, // 标题距离左边的距离
+        top: 10 // 标题距离顶部的距离
+      },
+      tooltip: { // 工具提示
+        // trigger: 'item' 工具提示的类型 item代表的是每个柱本身, axis代表的是坐标轴
+        trigger: 'axis',
+        triggerOn: 'click', // 触发时机, click代表点击, mouseOver代表鼠标移过
+        // formatter: '{b} 的成绩是 {c}'
+        formatter: function(arg){ // 文字格式化
+          return arg[0].name + '的分数是:' + arg[0].data
+        }
+      },
+      xAxis: {
+        type: 'category',
+        data: xDataArr
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          name: '语文',
+          type: 'bar',
+          data: yDataArr
+        }
+      ]
+    }
+    mCharts.setOption(option)
+  </script>
+</body>
+
+</html>

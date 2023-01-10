@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="lib/echarts.min.js"></script>
+</head>
+
+<body>
+  <div style="width: 600px;height:400px"></div>
+  <script>
+    // init方法有两个参数, 第一个参数代表是一个dom节点, 第二个参数, 代表你需要使用哪一套主题
+    // 默认内置了两套主题 , light  dark
+    var mCharts = echarts.init(document.querySelector("div"), 'dark')
+    var xDataArr = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+    var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86]
+    var option = {
+      xAxis: {
+        type: 'category',
+        data: xDataArr
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          type: 'bar',
+          data: yDataArr,
+          markPoint: {
+            data: [
+              {
+                type: 'max', name: '最大值'
+              },
+              {
+                type: 'min', name: '最小值'
+              }
+            ]
+          },
+          markLine: {
+            data: [
+              {
+                type: 'average', name: '平均值'
+              }
+            ]
+          },
+          label: {
+            show: true,
+            rotate: 60
+          },
+          barWidth: '30%'
+        }
+      ]
+    };
+    mCharts.setOption(option)
+  </script>
+</body>
+
+</html>

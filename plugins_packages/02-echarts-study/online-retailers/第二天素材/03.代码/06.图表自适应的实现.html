@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="lib/echarts.min.js"></script>
+</head>
+
+<body>
+  <div style="height:400px;border: 1px solid red"></div>
+  <script>
+    var mCharts = echarts.init(document.querySelector("div"))
+    var xDataArr = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+    var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86]
+    var option = {
+      xAxis: {
+        type: 'category',
+        data: xDataArr
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          type: 'bar',
+          data: yDataArr,
+          markPoint: {
+            data: [
+              {
+                type: 'max', name: '最大值'
+              },
+              {
+                type: 'min', name: '最小值'
+              }
+            ]
+          },
+          markLine: {
+            data: [
+              {
+                type: 'average', name: '平均值'
+              }
+            ]
+          },
+          label: {
+            show: true,
+            rotate: 60
+          },
+          barWidth: '30%'
+        }
+      ]
+    }
+    mCharts.setOption(option)
+    // 监听window窗口大小变化的事件
+    window.onresize = function(){
+      // console.log('window.onresize...')
+      // 调用echarts实例对象的resize方法
+      mCharts.resize()
+    }
+    // window.onresize = mCharts.resize
+
+  </script>
+</body>
+
+</html>

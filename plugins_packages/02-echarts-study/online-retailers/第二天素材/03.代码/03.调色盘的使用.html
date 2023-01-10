@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="lib/echarts.min.js"></script>
+  <script src="theme/itcast.js"></script>
+</head>
+
+<body>
+  <div style="width: 600px;height:400px"></div>
+  <script>
+    var mCharts = echarts.init(document.querySelector("div"), 'itcast')
+    var pieData = [
+      {
+        value: 11231,
+        name: "淘宝",
+      },
+      {
+        value: 22673,
+        name: "京东"
+      },
+      {
+        value: 6123,
+        name: "唯品会"
+      },
+      {
+        value: 8989,
+        name: "1号店"
+      },
+      {
+        value: 6700,
+        name: "聚美优品"
+      }
+    ]
+    var option = {
+      color: ['red', 'green', 'blue', 'skyblue', 'purple'],
+      series: [
+        {
+          type: 'pie',
+          data: pieData,
+          color: ['pink', 'yellow', 'black', 'orange', 'red']
+        }
+      ]
+    };
+    mCharts.setOption(option)
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="lib/echarts.min.js"></script>
+</head>
+
+<body>
+  <div style="width: 600px;height:400px"></div>
+  <script>
+    //1. ECharts最基本的代码结构
+    //2. 准备数据[{name:???, value:??? },{}]
+    //   淘宝: 11231  京东: 22673  唯品会: 6123  1号店: 8989   聚美优品: 6700
+    //3. 将type的值设置为pie
+    var mCharts = echarts.init(document.querySelector("div"))
+    // pieData就是需要设置给饼图的数据, 数组,数组中包含一个又一个的对象, 每一个对象中, 需要有name和value
+    var pieData = [
+      {
+        name: '淘宝',
+        value: 11231
+      },
+      {
+        name: '京东',
+        value: 22673
+      },
+      {
+        name: '唯品会',
+        value: 6123
+      },
+      {
+        name: '1号店',
+        value: 8989
+      },
+      {
+        name: '聚美优品',
+        value: 6700
+      }
+    ]
+    var option = {
+      series: [
+        {
+          type: 'pie',
+          data: pieData
+        }
+      ]
+    }
+    mCharts.setOption(option)
+  </script>
+</body>
+
+</html>

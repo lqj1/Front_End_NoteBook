@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="lib/echarts.min.js"></script>
+</head>
+
+<body>
+  <div style="width: 600px;height:400px"></div>
+  <script>
+    var mCharts = echarts.init(document.querySelector("div"))
+    var xDataArr = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+    var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86]
+    var option = {
+      xAxis: {
+        type: 'category',
+        data: xDataArr
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          type: 'bar',
+          data: yDataArr,
+          itemStyle: {
+            // color: {
+            //   type: 'linear', // 线性渐变
+            //   x: 0,
+            //   y: 0,
+            //   x2: 0,
+            //   y2: 1,
+            //   colorStops:[
+            //     {
+            //       offset: 0, color: 'red' // 0%处的颜色为红色
+            //     },
+            //     {
+            //       offset: 1, color: 'blue' // 100%处的颜色为蓝
+            //     }
+            //   ]
+            // }
+            color: {
+              type: 'radial', // 径向渐变
+              x: 0.5,
+              y: 0.5,
+              r: 0.5,
+              colorStops: [
+                {
+                  offset: 0, color: 'red' // 0%处的颜色为红色
+                },
+                {
+                  offset: 1, color: 'blue' // 100%处的颜色为蓝
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+    mCharts.setOption(option)
+  </script>
+</body>
+
+</html>
