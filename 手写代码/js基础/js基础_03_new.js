@@ -6,70 +6,93 @@
  *  4. 判断函数的返回值类型，如果是值类型，返回创建的对象；如果是引用类型，返回这个引用类型的对象
  */
 
-// new 的使用
-function Person(name, age) {
-  this.name = name
-  this.age = age
+function realizeNew() {
+  // 1. 创建一个空的对象
+  let obj = {};  // 或者 let obj = new Object();
+  // 我们创建的时候调用 realizeNew (Person,"Curry",18)，所以第一个参数就是构造函数
+  // 2. 获取构造函数，同时弹出arguments中第一个参数，也就是构造函数
+  // 所以这里 Con 就是 Person的构造函数
+  let Con = [].shift.call(arguments);
+  // 3. 链接到原型（给obj这个新生对象的原型指向它的构造函数的原型）
+  // obj可以访问构造函数原型中的属性
+  Object.setPrototypeOf(obj, Con.prototype); 
+  // 或者obj.__proto__ = Con.prototype; // 但__proto__已不被推荐使用
+  // 4. 绑定this，将原来构造函数的this绑定到新创建的对象
+  let result = Con.apply(obj, arguments);
+  // 5. 确保返回的new出来的东西是一个对象，就是【判断构造器有没有返回对象】
+  // 如果【构造器没有手动返回对象，有些构造函数没有返回任何东西，如以下的Person】，则返回第一步创建的新对象，
+  // 如果有，则舍弃掉第一步创建的新对象，返回手动return的对象
+  return typeof result === 'object' ? result : obj
 }
-const p = new Person('lee', 26)
-// new 的作用：根据构造函数创建了一个对象
-// 模拟：需要形成如下功能，传入构造函数，传入参数，生成以该构造函数生成的实例
 
-_new(Person, 'xu', 26)
 
-// 手写 new 
-// argument为默认的参数列表
-function myNew (fn,...args) {    // 参数等价于 arguments
-  let newObject = null
-  // Array.prototype.shift.call(arguments)中，
-  // 就是Array.prototype中有shift的方法，但是本身没有值，
-  // 指向了arguments这个类数组对象上，所以才能成功，
-  // arguments对象一直都没被改变，就是个this指向问题。
+// ****【去注释版本】****
+function realizeNew () {
+  let obj = {}
+  let Con = [].slice.call(arguments)
+  Object.setPrototypeOf(obj, Con.prototype)
+  let result = Con.apply(obj, arguments)
+  return typeof result === 'object' ? result : obj
+}
 
-  // shift() 方法从数组中删除第一个元素，并返回该元素的值
-  // Array.prototype.shift.call(arguments) 获取参数列表的第一项
-  let func = Array.prototype.shift.call(arguments)
-  let result = null
-  if (typeof func!== 'function') {
-    console.error("type error");
-    return;
+
+// 测试1
+function Person (name,age){
+  this.name = name;
+  this.age = age;
+  this.say = function () {
+      console.log("I am " + this.name)
   }
-  // 新建一个空对象，对象的原型为构造函数的 prototype 对象
-  // Object.create 的第一个参数为原型
-  newObj = Object.create(func.prototype)
-  // 上面代码等价于
-  // newObj = new Object()  // 等价于 newObj = {}
-  // object.__protp__ = func.prototype
-
-  // 将this指向新建的对象，并执行函数
-  // 这里的 arguments 已经被移除了第一个参数
-  result = func.apply(newObj, arguments)
-  // 判断返回的对象是否存在，存在再判断类型
-  let flag = result && (typeof result === 'object' || typeof result === 'function')
-  // 如果是真为引用类型，返回这个引用类型的对象，否则为值类型(如null/undefined)，返回创建的对象；
-  return flag ? result : newObj
 }
-// 使用
-// myNew(构造函数,初始化参数)
-// 情况2：最后的判断为值类型
-function Person3(){}; 
-myNew(Person3)
-Object.create(Person3.prototype)  // 结果:Person3{}    其中__protp__为Object 
-Person3.apply(Object.create(Person3.prototype)) // undefined，所以函数最终返回的就是 Person3{} (__protp__为Object)
-// 返回的就是 Person3{}，因为函数中没有任何操作
 
+//通过new创建构造实例
+let person1 = new Person("Curry",18);
+console.log(person1.name);      //"Curry"
+console.log(person1.age);       //18
+person1.say();                  //"I am Curry'
 
-// 简写
-function myNew () {
-  let newObj = null
-  let result = null
-  let func = Array.prototype.shift.call(arguments)
-  if (typeof func !== 'function') {
-    console.error('type error')
-    return
+//通过realize()方法创造实例
+let person2 = realizeNew(Person, "Curry", 18); 
+// 此时的 18 行代码执行之后的 obj 如下：Person { name: 'Curry', age: 18, say: f },  f 的内容如下
+// ƒ() {
+//   console.log("I am " + this.name)
+// }
+console.log(person2.name);      //"Curry"
+console.log(person2.age);       //18
+person2.say();                  //"I am Curry'
+
+// 测试2
+function Person (name,age){
+  this.name = name;
+  this.age = age;
+  this.say = function () {
+      console.log("I am " + this.name)
   }
-  newObj = Object.create(func.prototype)
-  result = func.apply(newObj, arguments)
-  let flag = result && (typeof result === 'object' || typeof result === 'function')
-  return flag ? result : newObj
+  return 'test'
 }
+// 这时候25行判断的 result 就是 string, 但是 obj 依然返回 Person { name: 'Curry', age: 18, say: f } 对象
+
+
+// 测试3
+function Person (name,age){
+  this.name = name;
+  this.age = age;
+  this.say = function () {
+      console.log("I am " + this.name)
+  }
+  return { name: 'lqj', age: '20' }
+}
+let person3 = new Person("Curry",18);
+// 这时候返回的 result 是 {name: 'lqj', age: '20'}, obj 返回依然是上述 Person 对象
+// 新建 person3 对象的时候，输出的 name 和 age 还是 Curry,18，不受 return 的影响
+
+
+// 正常对象
+function Person (name) {
+  var object = {};
+  object.name = name;
+  object.age = 21;
+  return object;
+}
+
+

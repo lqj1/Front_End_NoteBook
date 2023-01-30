@@ -13,18 +13,18 @@ function payMoney(a) {
   console.log(a)
 }
 
-
-function debounce (fn, wait) {
+function debounce (func, wait) {
   let timer = null
   return function () {
-    let context = this
-    let args = arguments
+    const context = this
+    const args = arguments 
     if (timer) {
       clearTimeout(timer)
       timer = null
     }
     timer = setTimeout(() => {
-      fn.apply(context, args)
+      func.apply(context, args)
     }, wait);
   }
 }
+

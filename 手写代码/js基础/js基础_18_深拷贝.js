@@ -114,12 +114,13 @@ console.log(objA, newObj);
   日期变成字符串而不是标准格式
  */
 
+
 // 最终简化版
 function deepClone (source) {
   // 过滤特殊情况，跳出递归
   if(typeof source !== 'object') return source;  // 不是对象，就返回obj
   // 能往下走就是对象
-  if(source === null) return null;  // source 也是对象，需要排除
+  if(source === null) return null;  // null 也是对象，但不需要处理，需要排除
   // 正则处理
   if(source instanceof RegExp) {
       return new RegExp(source)    
@@ -145,3 +146,4 @@ function deepClone (source) {
   }
   return targetObj
 }
+

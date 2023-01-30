@@ -1,21 +1,25 @@
 function minNumberInRotateArray(rotateArray)
 {
     // write code here
-  
-  let left = 0, right = rotateArray.length - 1
-  while (left <= right) {
-    let mid = left + (right - left) / 2
-    if (rotateArray[mid] > rotateArray[right]) {
-      // 中间的数大于右子数组最大值，最小值在右边，将范围缩小为右子数组
-      left = mid + 1
-    } else if (rotateArray[mid] < rotateArray[right]){
-      // 在左边
-       right = mid - 1
+  if (rotateArray.length == 0) {
+    return 0
+  }
+  let l = 0, r = rotateArray.length - 1   
+  while (l < r) {
+    // 这里需要向下取整
+    let m = l + Math.floor((r - l) / 2)
+    if (rotateArray[m] > rotateArray[r]) {
+      // 大于的话，证明在中间值的右半区，可以不包含中间值
+      l = m + 1
+    } else if (rotateArray[l] < rotateArray[r]) {
+      // 小于的话，证明处在右边区域，需要包含中间值
+      r = m
     } else {
-      return mid
+      // 相等的话，将区域往左缩小，中间值也会往左缩小
+      r-- 
     }
   }
-  return rotateArray[mid]
+  return rotateArray[l]
 }
 module.exports = {
     minNumberInRotateArray : minNumberInRotateArray
