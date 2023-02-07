@@ -21,7 +21,7 @@ function dfs (root, sum) {
     return 0
   }
   // 需要限定是叶子节点，否则和是根节点就直接返回了 {1,2}1
-  if(root.val === sum && !root.left && !root.right) {
+  if(root.val === sum && !root.left && !root.right) { 
     return true
   }
   return dfs(root.left, sum - root.val) || dfs(root.right, sum - root.val)
