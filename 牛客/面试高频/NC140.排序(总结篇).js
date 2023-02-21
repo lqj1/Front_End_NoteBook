@@ -34,3 +34,11 @@ function bubbleSort( arr ) {
   console.log('arr: ', arr)
 }
 bubbleSort([3, 5, 4, 2, 1])
+
+
+/**
+ * 堆排序
+ * 堆排序的过程分为建堆和排序两大步骤。
+ * 建堆过程的时间复杂度为O(n)，排序过程的时间复杂度为O(nlogn)，
+ * 所以，堆排序整体的时间复杂度为O(nlogn）。
+ */
